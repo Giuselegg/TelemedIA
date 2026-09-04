@@ -1,0 +1,273 @@
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF06152B),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // PARTE SUPERIORE
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 18,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _topButton(Icons.menu),
+                  _topButton(
+                    Icons.notifications_none,
+                    notification: true,
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // LOGO
+            const Icon(
+              Icons.smart_toy,
+              size: 90,
+              color: Color(0xFFF44336),
+            ),
+
+            const SizedBox(height: 8),
+
+            const Text(
+              'TelemedIA',
+              style: TextStyle(
+                fontSize: 42,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            Container(
+              width: 95,
+              height: 3,
+              color: Color(0xFFF44336),
+            ),
+
+            const SizedBox(height: 18),
+
+            const Text(
+              'L’INTELLIGENZA ARTIFICIALE\n'
+              'AL SERVIZIO DELLE PERSONE',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.3,
+                color: Colors.white,
+              ),
+            ),
+
+            const Spacer(),
+
+            const Text(
+              'Come posso aiutarti oggi?',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+
+            const SizedBox(height: 18),
+
+            // CAMPO RICHIESTA
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 28),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(28),
+                ),
+                child: const TextField(
+                  maxLines: 3,
+                  decoration: InputDecoration(
+                    hintText: 'Scrivi qui la tua richiesta...',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
+                    border: InputBorder.none,
+                    suffixIcon: Icon(
+                      Icons.send,
+                      color: Color(0xFF06152B),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // MICROFONO
+            Container(
+              width: 76,
+              height: 76,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.blueAccent,
+                  width: 4,
+                ),
+              ),
+              child: const Icon(
+                Icons.mic_none,
+                color: Colors.white,
+                size: 36,
+              ),
+            ),
+
+            const SizedBox(height: 14),
+
+            const Text(
+              'Inizia una conversazione.',
+              style: TextStyle(
+                color: Colors.blueAccent,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 5),
+
+            const Text(
+              'La nostra Intelligenza Artificiale è pronta ad aiutarti.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 13,
+              ),
+            ),
+
+            const Spacer(),
+
+            // MENU INFERIORE
+            Container(
+              margin: const EdgeInsets.all(18),
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(
+                  color: Colors.white12,
+                ),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _BottomItem(
+                    icon: Icons.home_outlined,
+                    label: 'Home',
+                    active: true,
+                  ),
+                  _BottomItem(
+                    icon: Icons.lightbulb_outline,
+                    label: 'Progetti',
+                  ),
+                  _BottomItem(
+                    icon: Icons.smart_toy_outlined,
+                    label: 'Assistente',
+                  ),
+                  _BottomItem(
+                    icon: Icons.business_center_outlined,
+                    label: 'Servizi',
+                  ),
+                  _BottomItem(
+                    icon: Icons.person_outline,
+                    label: 'Profilo',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Widget _topButton(
+    IconData icon, {
+    bool notification = false,
+  }) {
+    return Stack(
+      children: [
+        Container(
+          width: 54,
+          height: 54,
+          decoration: BoxDecoration(
+            color: Colors.white10,
+            borderRadius: BorderRadius.circular(17),
+          ),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
+        if (notification)
+          Positioned(
+            right: 3,
+            top: 3,
+            child: Container(
+              width: 14,
+              height: 14,
+              decoration: const BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class _BottomItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool active;
+
+  const _BottomItem({
+    required this.icon,
+    required this.label,
+    this.active = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          icon,
+          color: active ? Colors.red : Colors.white,
+          size: 26,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            color: active ? Colors.red : Colors.white,
+            fontSize: 10,
+          ),
+        ),
+      ],
+    );
+  }
